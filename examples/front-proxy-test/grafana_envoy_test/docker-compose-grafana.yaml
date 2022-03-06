@@ -12,15 +12,18 @@ services:
     - "9001:8001"
 
   grafana:
-    images: grafana/grafana
+    image: "grafana/grafana"
 
     # build:
     #   context: .
     #   dockerfile: Dockerfile-service
-    # volumes:
-    # - ./grafana.int:/etc/grafana/grafana.ini
+    volumes:
+    - ./grafana.ini:/etc/grafana/grafana.ini
     networks:
     - grafana_net
+    ports:
+    - "9002:3000"
+
 
 
 

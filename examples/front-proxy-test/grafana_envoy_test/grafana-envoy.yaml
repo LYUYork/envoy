@@ -32,7 +32,7 @@ static_resources:
               - match:
                   prefix: "/grafana/"
                 route:
-                  cluster: local_service
+                  cluster: grafana_service
               # - match:
               #     prefix: "/"
               #   route:
@@ -41,30 +41,30 @@ static_resources:
           http_filters:
           - name: envoy.filters.http.router
   clusters:
-  - name: local_service
+  - name: grafana_service
     type: STRICT_DNS
     lb_policy: ROUND_ROBIN
     load_assignment:
-      cluster_name: local_service
+      cluster_name: grafana_service
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: 127.0.0.1
+                address: grafana
                 port_value: 3000
 admin:
   address:
     socket_address:
       address: 0.0.0.0
-      port_value: 8081
+      port_value: 8001
 
-layered_runtime:
-  layers:
-  - name: static_layer_0
-    static_layer:
-      envoy:
-        resource_limits:
-          listener:
-            example_listener_name:
-              connection_limit: 10000
+# layered_runtime:
+#   layers:
+#   - name: static_layer_0
+#     static_layer:
+#       envoy:
+#         resource_limits:
+#           listener:
+#             example_listener_name:
+#               connection_limit: 10000
