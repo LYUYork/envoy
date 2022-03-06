@@ -2,14 +2,29 @@ version: "3.7"
 services:
 
   grafana-envoy:
-    build:
-      context: .
-      dockerfile: Dockerfile-grafanaenvoy
+    image: "envoyproxy/envoy-alpine:v1.20.0"
+    environment:
+      - ENVOY_UID=0
+    volumes:
+    - ./grafana-envoy.yaml:/etc/envoy/envoy.yaml
     networks:
-    - grafana_net
+      grafana_net:
+        aliases:
+        # - front-proxy
+        - ingress
+    depends_on:
+    - grafana
+
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile-grafanaenvoy
+    # networks:
+    # - grafana_net
+
     ports:
     - "9000:3000"
     - "9001:8001"
+    
 
   grafana:
     image: "grafana/grafana"
