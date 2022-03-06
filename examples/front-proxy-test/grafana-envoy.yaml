@@ -32,7 +32,7 @@ static_resources:
               - match:
                   prefix: "/grafana/"
                 route:
-                  cluster: grafana
+                  cluster: local_service
               # - match:
               #     prefix: "/"
               #   route:
