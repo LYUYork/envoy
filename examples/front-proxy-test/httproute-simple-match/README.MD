@@ -1,0 +1,6 @@
+envoy：Front Proxy,地址为172.31.50.10
+7个后端服务
+light_blue和dark_blue：对应于Envoy中的blue集群
+light_red和dark_red：对应于Envoy中的red集群
+light_green和dark_green：对应Envoy中的green集群
+gray：对应于Envoy中的gray集群
